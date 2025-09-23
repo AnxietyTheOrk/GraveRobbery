@@ -67,3 +67,7 @@ size = Vector3(0.5, 10, 30)
 [node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, 5)
 size = Vector3(20, 10, 0.5)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2872, 5, 12.650232)
+size = Vector3(0.5, 10, 25)
