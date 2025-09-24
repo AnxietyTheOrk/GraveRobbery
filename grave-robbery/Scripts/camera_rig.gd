@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		var mouse_delta = event.relative * -mouse_sensitivity
+		var mouse_delta: Vector2 = event.relative * -mouse_sensitivity
 		rotation_degrees.y += mouse_delta.x
 		rotation_degrees.x += mouse_delta.y
 		rotation_degrees.x = clampf(rotation_degrees.x, -70, 50)
