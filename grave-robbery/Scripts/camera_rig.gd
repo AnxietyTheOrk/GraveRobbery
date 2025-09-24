@@ -5,7 +5,7 @@ extends SpringArm3D
 @export var mouse_sensitivity := 0.07
 var mouse_input: Vector2 = Vector2()
 @onready var player: Node3D = get_parent()
-@onready var camera_rig_height: float = position.y + 2
+@export var camera_height_offset: float = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,6 +16,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var look_input := Input.get_vector("view_right", "view_left", "view_down", "view_up")
 	look_input = turn_rate * look_input * delta
+	
+	# Add mouse input and then clear it immediately
 	look_input += mouse_input
 	mouse_input = Vector2()
 
@@ -32,4 +34,5 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
-	position = player.position * Vector3(0,camera_rig_height,0)
+	# Follow the player position with a height offset
+	position = Vector3(player.position.x, player.position.y + camera_height_offset, player.position.z)
