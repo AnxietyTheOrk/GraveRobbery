@@ -15,9 +15,9 @@ func _process(delta: float) -> void:
 	var look_input := Input.get_vector("view_right", "view_left", "view_down", "view_up")
 	look_input = turn_rate * look_input * delta
 	
-	# Add mouse input and then clear it immediately
+	# Add mouse input and clear it immediately
 	look_input += mouse_input
-	mouse_input = Vector2()
+	mouse_input = Vector2.ZERO
 
 	rotation_degrees.x += look_input.y
 	rotation_degrees.y += look_input.x
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		mouse_input = event.relative * -mouse_sensitivity
+		mouse_input += event.relative * -mouse_sensitivity
 	elif event is InputEventKey and event.keycode == KEY_ESCAPE and event.pressed:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
