@@ -34,5 +34,5 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
-	# Follow the player position with a height offset
-	position = Vector3(player.position.x, player.position.y + camera_height_offset, player.position.z)
+	# Follow the player position, maintaining the original height offset
+	position = Vector3(player.position.x, camera_height_offset, player.position.z)
