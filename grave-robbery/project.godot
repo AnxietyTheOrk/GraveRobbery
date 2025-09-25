@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GraveRobbery"
+config/name="Grave Robbery"
 run/main_scene="uid://dducj8e3002sb"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 [debug]
 
 gdscript/warnings/untyped_declaration=2
+
+[display]
+
+window/size/mode=3
 
 [dotnet]
 
@@ -79,3 +83,4 @@ view_down={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+anti_aliasing/quality/msaa_3d=1
