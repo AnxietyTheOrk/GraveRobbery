@@ -12,17 +12,21 @@ func _ready() -> void:
 	spring_length = camera.position.z
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var look_input := Input.get_vector("view_right", "view_left", "view_down", "view_up")
 	look_input = turn_rate * look_input * delta
-	look_input += mouse_input
+	
+	# Apply mouse input and clear it immediately
+	rotation_degrees.x += mouse_input.y
+	rotation_degrees.y += mouse_input.x
 	mouse_input = Vector2()
-
+	
+	# Apply keyboard input
 	rotation_degrees.x += look_input.y
 	rotation_degrees.y += look_input.x
 	rotation_degrees.x = clampf(rotation_degrees.x, -70, 50)
-
+	
+	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_input = event.relative * -mouse_sensitivity
