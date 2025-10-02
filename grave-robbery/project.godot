@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Grave Robbery"
-run/main_scene="uid://dducj8e3002sb"
+run/main_scene="uid://c532vf4rdmsoh"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+ConfigFileHandler="*res://Globals/config_file_handler.gd"
+Global="*res://Globals/global.gd"
 
 [debug]
 

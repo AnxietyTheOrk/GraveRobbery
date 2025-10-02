@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://c532vf4rdmsoh"]
+[gd_scene load_steps=2 format=3 uid="uid://c532vf4rdmsoh"]
+
+[ext_resource type="Script" uid="uid://d060d02p42j1x" path="res://Main_Menu/main_menu.gd" id="1_oa53l"]
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_oa53l")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -64,7 +67,7 @@ layout_mode = 2
 [node name="Seperator6" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Contine" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Continue"
@@ -72,7 +75,7 @@ text = "Continue"
 [node name="Seperator" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="NewGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "New Game"
@@ -80,7 +83,7 @@ text = "New Game"
 [node name="Seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button3" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Load Game" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Load Game"
@@ -88,7 +91,7 @@ text = "Load Game"
 [node name="Seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button4" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Settings"
@@ -96,7 +99,13 @@ text = "Settings"
 [node name="Seperator4" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button5" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Exit"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Contine" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Load Game" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

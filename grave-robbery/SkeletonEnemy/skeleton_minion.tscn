@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://ceavnc52h8x0v"]
+
+[ext_resource type="PackedScene" uid="uid://bj0vcfbp6xach" path="res://SkeletonEnemy/Skeleton_Minion.glb" id="1_4b721"]
+[ext_resource type="Script" uid="uid://dfmbsu3ymqt7q" path="res://SkeletonEnemy/skeleton_enemy.gd" id="2_06ilk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b721"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i6ao8"]
+animation = &"Unarmed_Melee_Attack_Punch_A"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qc5pc"]
+animation = &"Idle_Combat"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_06ilk"]
+animation = &"Walking_D_Skeletons"
+advance_on_start = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qc5pc"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_07im2"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hr6qx"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ac5im"]
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b8gbg"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qc5pc"]
+states/Attack/node = SubResource("AnimationNodeAnimation_i6ao8")
+states/Attack/position = Vector2(508, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_qc5pc")
+states/Idle/position = Vector2(196, 100)
+states/Run/node = SubResource("AnimationNodeAnimation_06ilk")
+states/Run/position = Vector2(340, 100)
+states/Start/position = Vector2(55, 100)
+transitions = ["Run", "Attack", SubResource("AnimationNodeStateMachineTransition_qc5pc"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_07im2"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_hr6qx"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ac5im"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_b8gbg")]
+
+[node name="Skeleton_Minion" instance=ExtResource("1_4b721")]
+script = ExtResource("2_06ilk")
+
+[node name="Rig" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="AnimationPlayer" parent="." index="1"]
+deterministic = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0732038, 0)
+shape = SubResource("CapsuleShape3D_4b721")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="3"]
+path_height_offset = 0.5
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+root_motion_track = NodePath("Rig/Skeleton3D:root")
+root_motion_local = true
+tree_root = SubResource("AnimationNodeStateMachine_qc5pc")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/attack = false
+parameters/conditions/idle = false
+parameters/conditions/run = false
